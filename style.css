@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --primary-color: #00eaff;
+    --secondary-color: #8a2be2;
+    --accent-color: #ff00ea;
+    --background-dark: #0d0d1a;
+    --panel-background: rgba(20, 20, 40, 0.7);
+    --border-glow: rgba(0, 234, 255, 0.4);
+    --text-light: #e0e0e0;
+    --text-muted: #a0a0b0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+.app-container {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.futuristic-background-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: radial-gradient(circle at 10% 20%, #2c004d 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, #0a0a2a 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a1a, #1a0a2a, #0a1a0a);
+    background-blend-mode: screen;
+    animation: bg-pulse 15s infinite ease-in-out;
+    filter: blur(2px);
+}
+
+@keyframes bg-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.95; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+    width: 100%;
+    max-width: 1400px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 0 15px var(--primary-color);
+    letter-spacing: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-item {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 0;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-item:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.nav-item:hover {
+    color: var(--primary-color);
+}
+
+.main-wrapper {
+    perspective: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.main-content-area {
+    background: var(--panel-background);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--border-glow);
+    border: 1px solid rgba(0, 234, 255, 0.2);
+    width: 90%;
+    max-width: 1200px;
+    transform: rotateX(5deg) scale(0.98);
+    transform-origin: center top;
+    transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+    margin-top: 30px;
+}
+
+.main-content-area:hover {
+    transform: rotateX(0deg) scale(1);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 0 40px var(--primary-color);
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.product-card {
+    background: rgba(30, 30, 50, 0.8);
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 234, 255, 0.3), 0 0 15px var(--accent-color);
+    border-color: var(--primary-color);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: rgba(0, 234, 255, 0.05);
+    border: 1px dashed var(--primary-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.placeholder-text {
+    opacity: 0.7;
+}
+
+.product-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px rgba(0, 234, 255, 0.3);
+}
+
+.product-steel {
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    flex-grow: 1;
+}
+
+.buy-now-button {
+    background-color: var(--primary-color);
+    color: var(--background-dark);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.buy-now-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 234, 255, 0.5);
+}
