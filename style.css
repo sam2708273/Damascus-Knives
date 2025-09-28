@@ -1,6 +1,254 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
 :root {
+    /* Updated Matte-Metallic Palette */
+    --primary-color: #A9B3BB;      /* Matte Silver/Light Grey */
+    --secondary-color: #6D7781;    /* Medium Grey */
+    --accent-color: #0077B6;       /* Subtle Blue Glow Accent */
+    --background-dark: #1C232A;    /* Very Dark, Charcoal Background */
+    --panel-background: #2D3740;   /* Slightly Lighter Panel Background */
+    --border-glow: rgba(169, 179, 187, 0.4); /* Subtle Silver Glow */
+    --text-light: #F0F4F8;         /* Near White Text */
+    --text-muted: #9AA8B3;         /* Muted Text */
+}
+
+body {
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+.app-container {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+/* Futuristic Background Effect (Now muted and textural) */
+.futuristic-background-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    /* Creating a subtle texture and gradient for a metallic backdrop */
+    background: 
+        radial-gradient(circle at 10% 20%, #37474F 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, #10151A 0%, transparent 50%),
+        linear-gradient(135deg, var(--background-dark), #151A1E);
+    background-blend-mode: screen;
+    animation: bg-pulse 15s infinite ease-in-out;
+    filter: blur(1px); /* Slightly less blur for a sharper look */
+}
+
+@keyframes bg-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.01); opacity: 0.98; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+    width: 100%;
+    max-width: 1400px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Muted logo glow */
+    letter-spacing: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-item {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 0;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color); /* Blue line for contrast */
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-item:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.nav-item:hover {
+    color: var(--accent-color);
+}
+
+/* Main Content Wrapper - for "a bit away from the page" effect */
+.main-wrapper {
+    perspective: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.main-content-area {
+    background: var(--panel-background);
+    border-radius: 18px; /* Slightly smaller radius for sharper look */
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--border-glow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    transform: rotateX(3deg) scale(0.98); /* Less aggressive tilt */
+    transform-origin: center top;
+    transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+    margin-top: 30px;
+}
+
+.main-content-area:hover {
+    transform: rotateX(0deg) scale(1);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 30px var(--accent-color); /* Stronger accent glow on hover */
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    /* Metallic Gradient Title */
+    background: linear-gradient(90deg, var(--primary-color), var(--text-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.product-card {
+    background: #343E48; /* Darker internal card color */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px) scale(1.02); /* Slight lift */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 10px var(--accent-color); /* Accent glow on hover */
+    border-color: var(--accent-color);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px dashed var(--primary-color);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.product-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.product-steel {
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    flex-grow: 1;
+}
+
+.buy-now-button {
+    background-color: var(--accent-color);
+    color: var(--background-dark);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.buy-now-button:hover {
+    background-color: #0099E5; /* Slightly brighter blue on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 119, 182, 0.7);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+:root {
     --primary-color: #00eaff;
     --secondary-color: #8a2be2;
     --accent-color: #ff00ea;
@@ -229,4 +477,4 @@ body {
 .buy-now-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 234, 255, 0.5);
-}
+} */
